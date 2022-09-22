@@ -4,6 +4,6 @@
 
 Exercício feito duranto o bootcamp de Java
 
-Resultado esperado:
+Resultado final:
 <br>
 <img src="./resultado-esperado.png">
