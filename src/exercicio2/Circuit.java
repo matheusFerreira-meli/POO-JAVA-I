@@ -9,27 +9,19 @@ class Person {
     String name;
     int age;
     int price;
-    // String lastname;
-    // String number;
-    // String bloodGroup;
-    // int register;
 
     Person(int id, String name,  int age, int price) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.price = price;
-
-        // this.bloodGroup =  bloodGroup;
-        // this.lastname = lastname;
-        // this.number = number;
-        // this.register = register;
     }
 }
 
 public class Circuit {
     static Scanner keyboard = new Scanner(System.in);
     static String option;
+    static int optionInt;
     static List<Person> listPerson = new ArrayList<Person>();
 
     public static void main(String[] args) {
@@ -46,16 +38,14 @@ public class Circuit {
             System.out.println("2 - Mostrar participantes");
             System.out.println("3 - Sair");
             System.out.print("R: ");
-            choise = keyboard.nextInt();
+            optionInt = keyboard.nextInt();
 
-            System.out.println(choise);
-
-            if (choise < 0 || choise > 3) System.out.println("Por favor escolha uma opção válida!");
+            if (optionInt < 0 || optionInt > 3) System.out.println("Por favor escolha uma opção válida!");
             else {
-                if (choise == 0) addPerson();
-                if (choise == 1) removePerson();
-                if (choise == 2) showListPerson();
-                if (choise == 3) break;
+                if (optionInt == 0) addPerson();
+                if (optionInt == 1) removePerson();
+                if (optionInt == 2) showListPerson();
+                if (optionInt == 3) break;
             }
 
         }
@@ -64,7 +54,22 @@ public class Circuit {
     private static void removePerson() {
         showListPerson();
         if(listPerson.size() > 0) {
-            System.out.println("Deseja remover qual participante?");
+            while(true) {
+                System.out.println("Deseja remover qual participante? (escolha pela id)");
+                optionInt = keyboard.nextInt();
+                boolean isExistsPerson = false;
+                for (Person person: listPerson) {
+                    if (person.id == optionInt) {
+                        listPerson.remove(person);
+                        isExistsPerson =  true;
+                        System.out.println("Participante removido com sucesso");
+                        break;
+                    }
+                }
+                if (!isExistsPerson) System.out.println("Participante não existe");
+                else break;
+            }
+
         }
     }
 
@@ -129,7 +134,6 @@ public class Circuit {
 
             System.out.print("Qual a idade do participante: ");
             int age = keyboard.nextInt();
-
             int price = choiseCircuit(age);
 
             listPerson.add(new Person(listPerson.size(), name, age, price));
